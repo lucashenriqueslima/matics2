@@ -7,7 +7,7 @@
 
         private array $handlers;
         private $notFound;
-        private $className = "Source\Controllers\\";
+        private $className = SITE["route"];
         private const METHOD_POST = 'POST';
         private const METHOD_GET = 'GET';
 
@@ -40,7 +40,7 @@
 
         public function run()
         {   
-
+            
             $requestUri = parse_url($_SERVER["REQUEST_URI"]);
             $requestPath =  $requestUri['path'];
             
@@ -61,7 +61,7 @@
                 if(is_array($parts)){
                     $this->className .= current($parts);
                     $handler = new $this->className;
-                    $method = $parts[1];
+                    $method = end($parts);
                     $callback = [$handler, $method];
                 }
             }

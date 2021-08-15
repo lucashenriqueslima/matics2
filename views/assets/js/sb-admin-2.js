@@ -1,3 +1,4 @@
+url = "http://localhost/matics2/me"
 (function($) {
   "use strict"; // Start of use strict
 

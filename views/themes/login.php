@@ -15,7 +15,7 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Seja Bem-vindo!</h1>
                             </div>
-                            <form class="user" action="<?= route("auth/login") ?>" method="post" autocomplete="off">
+                            <form class="user" action="<?= route("/auth/login") ?>" method="post" autocomplete="off">
 
                                 <div class="form-group">
                                     <input type="text" id="account" name="email" class="form-control form-control-user"

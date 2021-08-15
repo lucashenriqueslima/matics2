@@ -13,7 +13,6 @@
 
     public function login()
     {
-
         parent::render("/login", [
             "title" => site('name')."Bem-Vindo",
         ]);

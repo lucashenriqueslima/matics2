@@ -42,7 +42,16 @@ $(window).on("load", function(){
                 }
 
                 if (su.redirect) {
+
+                    sessionStorage.id_user = su.redirect.id;
+                    sessionStorage.id_sub_user = su.redirect.id;
                     window.location.href = su.redirect.url;
+                }
+
+                if(su.redirectlogin){
+                    console.log(su.redirectlogin.id);
+                
+               
                 }
 
             },650)
@@ -58,7 +67,7 @@ $(window).on("load", function(){
             }
 
             if (action === "close") {
-                ajax_load_div.fadeOut(500);
+                ajax_load_div.fadeOut(800);
             }
         }
     });

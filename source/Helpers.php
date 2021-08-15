@@ -14,7 +14,7 @@ function site(string $param = null): string
         return VIEWSPATH.$path.".php";
     }
 
-    function route(string $path): string
+    function route(string $path = null): string
     {
         return site().$path;
     }
@@ -77,4 +77,79 @@ function site(string $param = null): string
 
         return null;
     }
-         
+
+    function redirect($url = null)
+    {
+   echo "<script> window.location.href = '".site().$url."' </script>";
+ 
+    }
+
+
+    function verifyAccess($i)
+    {
+        if(isset($i) && $_SESSION['access'][$i] == false){
+            redirect("/me");
+            flash("error", "Acesso negado ¯\_( ͡❛ ͜ʖ ͡❛)_/¯");
+            
+        }
+    }
+
+    function scriptJs($script)
+    {
+        return "<script> ".$script." </script>";
+    }
+
+    
+    function convertMonth($month)
+    {
+        switch ($month) {
+            case 1:
+                return "Janeiro";
+                break;
+                
+                case 2:
+                    return "Fevereiro";
+                    break;
+
+                    case 3:
+                        return "Março";
+                        break;
+
+                        case 4:
+                            return "Abril";
+                            break;
+
+                            case 5:
+                                return "Maio";
+                                break;
+                                
+                                case 6:
+                                    return "Junho";
+                                    break;
+
+                                    case 7:
+                                        return "Julho";
+                                        break;
+                                        
+                                        case 8:
+                                            return "Agosto";
+                                            break;
+
+                                            case 9:
+                                                return "Setembro";
+                                                break;
+
+                                                case 10:
+                                                    return "Outubro";
+                                                    break;
+
+                                                    case 11:
+                                                        return "Nomvembro";
+                                                        break;
+
+                                                        case 12:
+                                                            return "Dezembro";
+                                                            break;
+                                        
+        }
+    }

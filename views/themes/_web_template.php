@@ -13,7 +13,7 @@
 
     <title><?= $title ?></title>
 
-    <!-- Custom fonts for this template-->
+
 
 
     <!-- Custom styles for this template-->
@@ -32,10 +32,15 @@
 </div>
 
 <?php include($content); ?>
+<script>
+Object.defineProperty(window, "variavel", {
+    value: "Hello Wolrd!"
+  });
+</script>
 
 <script src="<?= asset("/js/jquery.js"); ?>"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="<?= asset("/js/form.js"); ?>"></script>
+
 
 <?= flash() ?>
 </body>

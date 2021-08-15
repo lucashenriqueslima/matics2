@@ -1,48 +1,60 @@
 <?php
 
     namespace Source\Controllers;
+    use Source\Models\User;
 
-    class Auth extends Controller
+class Auth extends Controller
     {
         public function login($data)
         {
-            $login = $data["email"];
+            $username = $data["email"];
             $passwd = filter_var($data["passwd"]);
             
-            if(!$passwd || !$login){
+            if(!$passwd || !$username){
                 echo $this->ajaxResponse("message", [
                     "type" => "error",
-                    "message" => "Preencha todos os campos!"
+                    "message" => "Preencha todos os campos."
                 ]);
                 return;
             }
 
-               
+            $user = (new User())->login($username,$passwd); 
 
-            /*$user = (new User())->find("email = :e AND passwd = :p  OR cpf = :c AND passwd = :p" , "e={$login}&c={$login}&p={$passwd} ")->fetch();
+            if ($user == false){
+                echo $this->ajaxResponse("message", [
+                    "type" => "error",
+                    "message" => "Login ou senha incorreto."
+                ]);
+                return;
+            }
 
             
-            if ($user) {
-                
-                echo $this->ajaxResponse("redirect", ["url" => $this->router->route("app.home")]);
-                $_SESSION["userAdmin"] = $user->id;
-                $_SESSION["emailAdmin"] = $user->email;
-                $_SESSION["nameAdmin"] = $user->first_name." ".$user->last_name;
 
-                if(!empty($_SESSION["nameAdmin"])){
-                flash("blue darken-3", "Seja bem-vindo ao painel de controle {$_SESSION["nameAdmin"]}  :-)");
-                }
-                return;
+                $_SESSION["id_user"] = $user["id_user"];
+                $_SESSION["id_sub_user"] = !empty($user["id_sub_user"]) ? $user["id_sub_user"] : $user["id_user"];
+                $_SESSION["email"] = $user["email"];
+                str_word_count($user['name']) > 1 ? $_SESSION["name"] = @explode(" ", $user["name"]) : $_SESSION['name'] = $user['name'];
+                $_SESSION["access"] = !isset($user['access']) ? 1111111 : $_SESSION['level'] = 1;
+                $_SESSION["access"] = str_split($_SESSION["access"]);
+
+                echo $this->ajaxResponse("redirect", [
+                    "url" => route("/me"),
+                    "id_user" => parent::encrypt($_SESSION['id_user']),
+                    "id_sub_user" => parent::encrypt($_SESSION['id_sub_user'])
+                ]);
+
+                flash("success", "Seja bem-vindo {$_SESSION["name"][0]}  :-)");
                 
+                return;
+             
             } 
 
-            echo $this->ajaxResponse("message", [
-                "type" => "error",
-                "message" => "Login ou senha incorreto(s)"
-            ]);
-          
-            return;       
-        }
-        */
-        }
+            
+
+           
+
+        
+
+        
     }
+    
