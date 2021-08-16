@@ -9,8 +9,8 @@ class App extends Controller
     {
         public function __construct()
         {
-            ;
-            if(empty($_SESSION["id_user"]) || !$user_msg = (new Message())-> findById($_SESSION["id_user"])){
+            $user_msg = (new Message())-> findById($_SESSION["id_user"]);
+            if(empty($_SESSION["id_user"]) || $user_msg === false){
                 session_destroy();
                 redirect();
                 
@@ -23,18 +23,21 @@ class App extends Controller
         public function home()
         {
 
-            $currentDate = explode("-",date("d-m-Y"));
+            $currentDate = date("d-m-Y");
+            $minDate = date("d-m-Y",strtotime(date("Y-m-d")."-12 month"));
 
-            $data = (new Finance())->getDataDashboard($_SESSION['id_user'], $currentDate[2]);
+            $data = (new Finance())->getGraph($_SESSION['id_user'],  $minDate, $currentDate);
 
             
-            $dataDashboard = $data[0];
-            $minDate = $data[1]["MONTH(MIN(date))"];
+
+            $currentDate = explode("-",date("d-m-Y"));
+            
+            print_r($data);
             
             parent::render("/home", [
                 "title" => site('name')."Home",
                 "currentDate" => $currentDate,
-                "dataDashboard" => $dataDashboard,
+                "dataDashboard" => $data,
                 "minDate" => $minDate
             ]);
         }

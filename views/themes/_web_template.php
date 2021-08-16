@@ -40,7 +40,7 @@ Object.defineProperty(window, "variavel", {
 
 <script src="<?= asset("/js/jquery.js"); ?>"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<script src="<?= asset("/js/form.js"); ?>"></script>
 
 <?= flash() ?>
 </body>

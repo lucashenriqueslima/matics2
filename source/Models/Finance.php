@@ -1,23 +1,38 @@
 <?php
 
-    namespace Source\Models;
+namespace Source\Models;
 
-    Class Finance extends Model
+class Finance extends Model
+{
+    public function getGraph($id_user, $minDate, $maxDate)
     {
-        public function getDataDashboard($id_user, $year)
-        {   
 
-            $query = $this->pdo->prepare("SELECT credit, earning, expense FROM finance_month WHERE id_user = ? AND YEAR(date) = ? AND credit !=0 OR  id_user = ?  AND YEAR(date) = ? AND earning !=0 OR id_user = ? AND YEAR(date) = ? AND expense !=0  ORDER BY date ASC");
-            $query->execute(array($id_user, $year, $id_user, $year, $id_user, $year));
-            $dataDashboard = $query->fetchAll();
+        
+        $query = ("SELECT date,
+         credit,
+         earning,
+         expense
+FROM finance_month
+WHERE id_user = ?
+        AND credit !=0
+        AND
+    BETWEEN ".$minDate."
+        AND ".$maxDate."
+        OR id_user = ?
+        AND earning !=0
+        AND
+    BETWEEN ".$minDate."
+        AND ".$maxDate."
+        OR id_user = ?
+        AND expense !=0
+        AND
+    BETWEEN ".$minDate."
+        AND ".$maxDate."
+    ORDER BY  date ASC ");
+       $query2 = $this->pdo->prepare($query);
+        $query2->execute(array($id_user, $id_user, $id_user));
+        $data = $query2->fetchAll();
 
-            $query = $this->pdo->prepare("SELECT MONTH(MIN(date)) FROM finance_month WHERE id_user = ? AND YEAR(date) = ?");
-            $query->execute(array($id_user, $year));
-            $minDate = $query->fetch();
-
-            $data = [$dataDashboard, $minDate];
-
-            return $data;
-
-        }    
+        return $data;
     }
+}
