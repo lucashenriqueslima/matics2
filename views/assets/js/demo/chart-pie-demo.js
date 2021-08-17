@@ -1,4 +1,4 @@
-if(typeof minDate != "undefined" && typeof dataFinance != "undefined"){
+if(typeof dataFinance != "undefined"){
 
 let allData = parseFloat(credit[credit.length-1]) + parseFloat(earning[earning.length-1]) + parseFloat(expense[expense.length-1]);  
 

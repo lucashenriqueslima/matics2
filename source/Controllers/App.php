@@ -26,12 +26,9 @@ class App extends Controller
             $currentDate = date("d-m-Y");
             $minDate = date("d-m-Y",strtotime(date("Y-m-d")."-12 month"));
 
-            $data = (new Finance())->getGraph($_SESSION['id_user'],  $minDate, $currentDate);
-
-            
+            $data = (new Finance())->getGraph($_SESSION['id_user'],  $minDate, $currentDate);            
 
             $currentDate = explode("-",date("d-m-Y"));
-            
             print_r($data);
             
             parent::render("/home", [

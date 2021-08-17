@@ -22,31 +22,6 @@
         {
             return json_encode([$param => $values]);
         }
-
-        public function getIndexDate($min, $data = array())
-        {
-            $a = 0;
-            $arr = array();
-            for($i = 0; $i <= $min-2; $i++ )
-            {
-                $arr[$i]['credit'] = 0;
-                $arr[$i]['earning'] = 0;
-                $arr [$i]['expense'] = 0;
-            }   
-
-            for($i = $min-1; $i <= $min - 2 + count($data); $i++)
-            {
-                $arr[$i]['credit'] = $data[$a]['credit'];
-                $arr[$i]['earning'] = $data[$a]['earning'];
-                $arr[$i]['expense'] = $data[$a]['expense'];
-                
-                $a++;
-            }
-
-            
-
-            return $arr;
-        }
         
         public function encrypt($data)
         {
@@ -66,7 +41,6 @@
 
             return $TextoClaro = openssl_decrypt($TextoCifrado, $Cifra, "!@_#lh@!!_", OPENSSL_RAW_DATA, $IV);
         }
-
         
 }
 

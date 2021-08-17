@@ -1,33 +1,28 @@
 
-if(typeof minDate != "undefined" && typeof dataFinance != "undefined"){
-
-  let a = 0
+if(typeof dataFinance != "undefined"){
 
   profit = []
   credit = []
   earning = []
   expense = []
-  
-  
-  for(i = 0; i <= minDate-2; i++ )
+  date = [];
+
+
+
+
+  for(i = 0; i <= dataFinance.length - 1; i++)
   {
-    profit[i] = null;
-    credit[i] = null;
-    earning[i] = null;
-    expense [i] = null;
+      profit[i] = dataFinance[i]['earning'] - dataFinance[i]['expense']
+      credit[i] = dataFinance[i]['credit']
+      earning[i] = dataFinance[i]['earning'];
+      expense[i] = dataFinance[i]['expense'];
+      date[i] = dataFinance[i]['date'].substr(2, 5).split('-').reverse().join('/');
+
+
   }
-  
-  for(i = minDate-1; i <= minDate - 2 + dataFinance.length; i++)
-  {
-      profit[i] = dataFinance[a]['earning'] - dataFinance[a]['expense']
-      credit[i] = dataFinance[a]['credit']
-      earning[i] = dataFinance[a]['earning'];
-      expense[i] = dataFinance[a]['expense'];
-      
-      a++;
-  }
-  
-  
+    
+
+    
   
   Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
   Chart.defaults.global.defaultFontColor = '#858796';
@@ -39,7 +34,7 @@ if(typeof minDate != "undefined" && typeof dataFinance != "undefined"){
   var myLineChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+      labels: date,
       datasets: [{
         label: "Lucros",
         lineTension: 0.3,

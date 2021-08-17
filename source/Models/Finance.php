@@ -15,17 +15,14 @@ class Finance extends Model
 FROM finance_month
 WHERE id_user = ?
         AND credit !=0
-        AND
     BETWEEN ".$minDate."
         AND ".$maxDate."
         OR id_user = ?
         AND earning !=0
-        AND
     BETWEEN ".$minDate."
         AND ".$maxDate."
         OR id_user = ?
         AND expense !=0
-        AND
     BETWEEN ".$minDate."
         AND ".$maxDate."
     ORDER BY  date ASC ");
