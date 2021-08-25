@@ -6,13 +6,14 @@
     {   
 
         protected $template;
-        protected $msg_count;
+        protected $user_msg;
+
 
         public function render($content, $vars = [])
         {   
             $content = views($content);
             if(file_exists($content)){
-                $vars["msg_count"] = $this->msg_count;
+                $vars["user_msg"] = $this->user_msg;
                 extract($vars);
                 include($this->template);
             }

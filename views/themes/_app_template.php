@@ -201,7 +201,7 @@
                             
                         </div>
                     <datalist id="searchContent">
-                        <option value="teste"></option>
+                        <option value="teste">aaaa</option>
                         <option value="lucas"></option>
                         <option value="pedro"></option>
                         </datalist>
@@ -255,25 +255,14 @@
                                 <h6 class="dropdown-header">
                                     Central de Alertas
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500"></div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <a class="dropdown-item d-flex align-items-center" href="https://www.google.com">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-success">
                                             <i class="fas fa-donate text-white"></i>
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
+                                        <div class="small text-gray-500">07/08/2021</div>
                                         $290.29 has been deposited into your account!
                                     </div>
                                 </a>
@@ -388,7 +377,7 @@
     </div>
     
 
-    <?= scriptJs("let msg_count = ".$msg_count)?>
+    <?= scriptJs("let user_msg_count = ".count($user_msg) / 10)?>
 
 
 

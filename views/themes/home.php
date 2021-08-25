@@ -15,7 +15,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" id="media_lucro">
-                            
+                        Média Lucro Mensal
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="average">R$ 0,00</div>
                     </div>
@@ -34,7 +34,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1" id="lucro_total">
-                            Média Lucro Mensal - (Últimos 12 Meses)
+                        Lucro Total
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="total">R$ 0,00</div>
                     </div>
@@ -45,7 +45,9 @@
             </div>
         </div>
     </div>
+    <?php 
 
+    ?>
     <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-info shadow h-100 py-2">
@@ -86,7 +88,8 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary" id="visao_geral"></h6>
+                <h6 class="m-0 font-weight-bold text-primary" id="visao_geral">Visão Geral</h6>
+                
                 <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
@@ -114,7 +117,7 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Porcentagens Financeiras - Último Mês 
+                <h6 class="m-0 font-weight-bold text-primary" id="porcent">Porcentagens Financeiras 
                    </h6>
                 <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
@@ -154,23 +157,9 @@
 
 
 
-<?php  
-   echo @scriptJs("dataFinance = ". json_encode($dataDashboard));
-; 
+<?php 
+
+   if(!empty($dataDashboard)) echo scriptJs("dataFinance = ". json_encode($dataDashboard));
+
 ?>
-<script>
-    window.onload = function () {
-        if (typeof profit != "undefined") {
 
-            document.getElementById("media_lucro").innerHTML = "Média Lucro Mensal - (Últimos "+ profit.length +" Meses)"
-            document.getElementById("lucro_total").innerHTML = "Lucro Total - (Últimos "+ profit.length +" Meses)"
-            document.getElementById("visao_geral").innerHTML = "Visão Geral - (Últimos "+ profit.length +" Meses)"
-
-
-            let average = profit.reduce((average, currentElement) => average + currentElement)
-            document.getElementById("total").innerHTML = number_format(average)
-            average = average / (date.length)
-            document.getElementById("average").innerHTML = number_format(average)
-        }
-    }
-</script>

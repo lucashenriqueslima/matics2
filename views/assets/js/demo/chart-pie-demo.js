@@ -1,10 +1,10 @@
 if(typeof dataFinance != "undefined"){
 
-let allData = parseFloat(credit[credit.length-1]) + parseFloat(earning[earning.length-1]) + parseFloat(expense[expense.length-1]);  
+var allData = credit_total + earning_total + expense_total; 
 
-let creditPercent = credit[credit.length-1]*100 / allData
-let earningPerncent = earning[earning.length-1]*100 / allData
-let expensePercent = expense[expense.length-1]*100 / allData
+var creditPercent = credit_total*100 / allData
+var earningPerncent = earning_total*100 / allData
+var expensePercent = expense_total*100 / allData
 
 
 
@@ -42,4 +42,36 @@ var myPieChart = new Chart(ctx, {
     cutoutPercentage: 80,
   },
 });
+
+let last = " - (Últimos "
+            let date_count = date.length
+            let month = " Meses)"
+
+            if (date.length == 1) {
+                last = " - (Último "
+                date_count = " "
+                month = " Mês)"
+                
+            }
+
+            document.getElementById("media_lucro").innerHTML = document.getElementById("media_lucro").innerHTML + last + date_count + month
+            document.getElementById("lucro_total").innerHTML = document.getElementById("lucro_total").innerHTML + last + date_count + month
+            document.getElementById("visao_geral").innerHTML = document.getElementById("visao_geral").innerHTML + last + date_count + month
+            document.getElementById("porcent").innerHTML = document.getElementById("porcent").innerHTML + last + date_count + month
+            
+            document.getElementById("total").innerHTML = number_format(profit_total)
+            profit_average = profit_total / (date.length)
+            document.getElementById("average").innerHTML = number_format(profit_average)
+
+                if(profit_total < 0){
+                document.getElementById("total").style.color = "#ff3333"
+                document.getElementById("lucro_total").style.color = "#ff3333"
+                document.getElementById("media_lucro").style.color = "#ff3333"
+                document.getElementById("average").style.color = "#ff3333"
+
+
+                }
+
+
+
 }

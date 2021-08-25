@@ -9596,7 +9596,7 @@ button.bg-dark:focus {
 }
 
 .text-primary {
-  color: #4e73df !important;
+  color: #4e73df;
 }
 
 a.text-primary:hover, a.text-primary:focus {
@@ -9612,7 +9612,7 @@ a.text-secondary:hover, a.text-secondary:focus {
 }
 
 .text-success {
-  color: #1cc88a !important;
+  color: #1cc88a;
 }
 
 a.text-success:hover, a.text-success:focus {
@@ -10028,7 +10028,7 @@ a:focus {
 }
 
 .text-gray-800 {
-  color: #5a5c69 !important;
+  color: #5a5c69 
 }
 
 .text-gray-900 {

@@ -5,11 +5,12 @@ if(typeof dataFinance != "undefined"){
   credit = []
   earning = []
   expense = []
-  date = [];
+  date = []
 
-
-
-
+  var profit_total = 0 
+  var credit_total = 0
+  var earning_total = 0
+  var expense_total = 0
   for(i = 0; i <= dataFinance.length - 1; i++)
   {
       profit[i] = dataFinance[i]['earning'] - dataFinance[i]['expense']
@@ -18,9 +19,15 @@ if(typeof dataFinance != "undefined"){
       expense[i] = dataFinance[i]['expense'];
       date[i] = dataFinance[i]['date'].substr(2, 5).split('-').reverse().join('/');
 
+      profit_total += parseFloat(dataFinance[i]['earning']) - parseFloat(dataFinance[i]['expense'])
+      credit_total += parseFloat(dataFinance[i]['credit'])
+      earning_total += parseFloat(dataFinance[i]['earning'])
+      expense_total += parseFloat(dataFinance[i]['expense'])
 
   }
-    
+
+  
+
 
     
   
@@ -176,7 +183,7 @@ if(typeof dataFinance != "undefined"){
   var desc2 = document.createElement('h6')
   desc2.innerHTML = "Dados insuficientes para criação de gráfico."
   desc2.style.textAlign = "center"
-  desc2.style.marginTop = "-100"
+
 
   var chart_pie = document.getElementById("chart-pie")
   chart_pie.style.paddingTop = "0"
