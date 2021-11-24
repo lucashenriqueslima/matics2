@@ -18,7 +18,7 @@ class Auth extends Controller
                 return;
             }
 
-            $user = (new User())->login($username,$passwd); 
+            $user = (new User())->login($username, $passwd); 
 
             if ($user == false){
                 echo $this->ajaxResponse("message", [
@@ -39,8 +39,7 @@ class Auth extends Controller
 
                 echo $this->ajaxResponse("redirect", [
                     "url" => route("/me"),
-                    "id_user" => parent::encrypt($_SESSION['id_user']),
-                    "id_sub_user" => parent::encrypt($_SESSION['id_sub_user'])
+
                 ]);
 
                 flash("success", "Seja bem-vindo {$_SESSION["name"][0]}  :-)");
@@ -52,7 +51,7 @@ class Auth extends Controller
             
 
            
-
+            
         
 
         

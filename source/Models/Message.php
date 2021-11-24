@@ -8,20 +8,24 @@
 
         
         
-        public function findMessages($id_user)
+        public function findAlerts($id_user)
         {
         
-            $query = $this->pdo->prepare("SELECT mesages.link
-     , mesages.icon_type
-     , mesages.icon
-     , mesages.date
-     , mesages.message
-  FROM mesages
- WHERE id_user = ?");
+            $query = $this->pdo->prepare("SELECT alerts.link
+     , alerts.icon_type
+     , alerts.icon
+     , alerts.date
+     , alerts.message
+  FROM alerts
+        INNER JOIN access_alerts
+            ON alerts.id_alert = access_alerts.id_alert
+
+ WHERE id_sub_user = ? LIMIT 4");
 
             $query->execute(array($id_user));
             if ($query->rowcount() != 0){
-                return $query->fetch();
+     
+                return $query->fetchAll();
             }
              return false;
              

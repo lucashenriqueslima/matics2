@@ -32,17 +32,8 @@ function site(string $param = null): string
         */
     }
 
-    function setFlash($type, $msg){
-
-        if($type == 1){
-            $_SESSION["success"] = $msg;
-        }
-
-        if($type == 2){
-            $_SESSION["error"] = $msg;
-        }
        
-    }
+    
     function flash(string $type = null, string $message = null): ?string
     {
         if($type && $message){
@@ -153,3 +144,23 @@ function site(string $param = null): string
                                         
         }
     }
+
+    function showMessages(array $messages)
+    {
+        foreach($messages as $msg)
+        {
+        echo '<a class="dropdown-item d-flex align-items-center" href="'.$msg['link'].'">
+        <div class="mr-3">
+            <div class="icon-circle bg-'.$msg['icon_type'].'">
+                <i class="'.$msg['icon'].' text-white"></i>
+            </div>
+        </div>
+        <div>
+            <div class="small text-gray-500">'.$msg['date'].'</div>
+            '.$msg['message'].'
+        </div>
+    </a>';
+        }
+    }
+
+    

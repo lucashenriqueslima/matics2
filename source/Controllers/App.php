@@ -1,9 +1,8 @@
 <?php 
 
     namespace Source\Controllers;
-    use Source\Models\Message;
     use Source\Models\Finance;
-
+    use Source\Models\User;
 
 class App extends Controller
     {
@@ -13,7 +12,7 @@ class App extends Controller
         public function __construct()
         {
 
-            if(empty($_SESSION["id_user"]) || !$this->user_msg = (new Message())->findMessages($_SESSION["id_user"])){
+            if(empty($_SESSION["id_user"]) || !(new User())->auth_user($_SESSION["id_user"], $_SESSION["id_sub_user"])){
                 session_destroy();
                 redirect();
                 
@@ -22,21 +21,24 @@ class App extends Controller
             $this->template = views("/_app_template");  
         }
 
-        public function home()
-        {
-            
-            $currentDate = date("d-m-Y");
-            $minDate = date("d-m-Y",strtotime(date("Y-m-d")."-12 month"));
-
-            $data = (new Finance())->getGraph($_SESSION['id_user'],  $minDate, $currentDate);            
-
-            $currentDate = explode("-",date("d-m-Y"));
+        public function home($data)
+        {   
+            $year = date("Y");
+            $min_date = $year."-01-01";
+            $max_date = $year."-12-31";
+          
             
             parent::render("/home", [
                 "title" => site('name')."Home",
-                "currentDate" => $currentDate,
-                "dataDashboard" => $data,
-                "minDate" => $minDate
+                "year" => $year
+            ]);
+        }
+
+        
+        public function companies()
+        {  
+            parent::render("/companies", [
+                "title" => site('name')."Empresas",
             ]);
         }
 
@@ -50,7 +52,6 @@ class App extends Controller
 
         public function logoff()
         {
-    
             session_destroy();     
             redirect();
             

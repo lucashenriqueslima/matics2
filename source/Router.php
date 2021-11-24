@@ -12,19 +12,23 @@
         private const METHOD_GET = 'GET';
 
         public function get(string $path, $handler): void
-        {   
-            $path = "/matics2".$path;
+        {       
+            $path = SITE['folder'].$path;
             $this->addHandler(self::METHOD_GET, $path, $handler);
         }
 
         public function post(string $path, $handler): void
         {
-            $path = "/matics2".$path;
+            $path = SITE['folder'].$path;
             $this->addHandler(self::METHOD_POST, $path, $handler);
         }
 
         private function addHandler(string $method, string $path, $handler): void
-        {
+        {   
+            if(preg_match('/{/', $path)){
+                $path = explode('/{', $path)[0];
+            }
+
             $this->handlers[$method . $path] = [
                 'path' => $path,
                 'method' => $method,

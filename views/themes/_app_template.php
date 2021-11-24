@@ -8,11 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title><?=$title?></title>
-
-    <!-- Custom fonts for this template-->
-    <link href="<?= asset("/vendor/fontawesome-free/css/all.min.css");?>" rel="stylesheet" type="text/css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+      <!-- Custom fonts for this template-->
+      <link href="<?= asset("/vendor/fontawesome-free/css/all.min.css");?>" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,400,600,700,800"
         rel="stylesheet">
@@ -20,13 +21,26 @@
     <!-- Custom styles for this template-->
     <link href="<?=asset("css/sb-admin-2.css")?>" rel="stylesheet">
     <link href="<?=asset("css/load.css")?>" rel="stylesheet">
+    <link
+      href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
+      rel="stylesheet"
+    />
+
+    <script src="<?= asset("/js/utils/req.js");?>"></script>
+    <script src="<?= asset("/vendor/jquery/jquery.min.js");?>"></script>
+    <script src="<?= asset("/js/demo/sweetalert2.js");?>"></script>
+    <script src="<?= asset("/js/utils/popups.js");?>"></script>
+    <script src="<?= asset("/js/utils/formats.js");?>"></script>
+    <script src="<?= asset("/js/utils/form.js"); ?>"></script>   
+
+    <title><?=$title?></title>
+
 
 </head>
 
 <body id="page-top">
 
     
-
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -89,8 +103,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Empresas / Clientes</h6>
-                        <a class="collapse-item" href="<?= route("/me/cadastrar-empresa-cliente") ?>">Cadastro</a>
-                        <a class="collapse-item" href="cards.html">Listar</a>
+                        <a class="collapse-item" href="<?= route("/me/empresas") ?>">Empresas</a>
+                        <a class="collapse-item" href="cards.html">Clientes</a>
                     </div>
                 </div>
             </li>
@@ -255,29 +269,9 @@
                                 <h6 class="dropdown-header">
                                     Central de Alertas
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="https://www.google.com">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">07/08/2021</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                               
+
+                               
                             </div>
                         </li>
 
@@ -326,8 +320,7 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                   
-                <?php include($content); ?>
+                <?php require($content); ?>
                 
                 </div>
                 <!-- /.container-fluid -->
@@ -369,21 +362,23 @@
                 </div>
                 <div class="modal-body">Clique em "Sair" para encerrar a sessão atual.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <button href="#" class="btn btn-secondary btn-icon-split" type="button" data-dismiss="modal">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-times"></i>
+                    </span>
+                    <span class="text">Cancelar</span>
+                </button>
                     <a class="btn btn-primary" href="<?= route("/me/logoff")?>">Sair</a>
                 </div>
             </div>
         </div>
     </div>
+
     
 
-    <?= scriptJs("let user_msg_count = ".count($user_msg) / 10)?>
+    
 
 
-
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="<?= asset("/vendor/jquery/jquery.min.js");?>"></script>
     <script src="<?= asset("/vendor/bootstrap/js/bootstrap.bundle.min.js");?>"></script>
 
     <!-- Core plugin JavaScript-->
@@ -391,36 +386,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="<?= asset("/js/sb-admin-2.min.js");?>"></script>
-
-    <script src="<?= asset("/js/formats.js");?>"></script>   
-    <script src="<?= asset("/vendor/chart.js/Chart.min.js");?>"></script>         
-    <script src="<?= asset("/js/demo/chart-area-demo.js");?>"></script>
-    <script src="<?= asset("/js/demo/chart-pie-demo.js");?>"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="<?= asset("/js/form.js"); ?>"></script>
-    <script> 
-
-        function msg_count_restart()
-        {
-            if(msg_count != 0){
-            $.ajax({
-            url: "http://localhost/matics2/auth/reset",
-            data: {"id":sessionStorage.id},
-            type: "post",
-            dataType: "json",
-            })
-            document.getElementById("msg").style.display = "none"
-        }
-        }
-
-        if(msg_count != 0){
-        document.getElementById("msg").innerHTML = "+" + msg_count
-        }else{
-        document.getElementById("msg").style.display = "none"
-        }
-
-
-    </script>
+    <script src="<?= asset("/vendor/chart.js/Chart.min.js");?>"></script>      
 
     <?= flash() ?>
 </body>
