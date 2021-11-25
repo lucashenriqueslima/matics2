@@ -41,6 +41,8 @@ $router->post("/reset", "Auth:msg");
 $router->group("api");
 $router->get("/v1/getdategraph", 'Api:getDateGraph');
 $router->get("/v1/getdatagraph/{min_date}/{max_date}", "Api:getDataGraph");
+$router->get("/v1/getcompanies", "Api:getCompanies");
+$router->get("/v1/getcompanies/{keyword}", "Api:getCompanieskey");
 
 $router->group("ooops");
 $router->get("/{errcode}", function ($data){

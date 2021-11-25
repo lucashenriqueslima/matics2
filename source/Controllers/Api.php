@@ -1,7 +1,9 @@
 <?php
 
     namespace Source\Controllers;
-    use Source\Models\Finance;
+
+use Source\Models\Companies;
+use Source\Models\Finance;
     use Source\Models\Message;
     use Source\Models\User;
 
@@ -36,5 +38,20 @@
                 }
                 $msgCount = (new Message())->msgCounterReset($id);  
                 
+        }
+
+        public function getCompanies($data) 
+        {
+            if(empty($data['keyword'])){
+            return print_r(json_encode((new Companies)->getCompanies($_SESSION['id_user'])));
+            }
+
+            
+            
+        }
+        
+        public function getCompaniesKey($data) 
+        {   
+            return print_r(json_encode($data));
         }
     }

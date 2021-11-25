@@ -16,21 +16,35 @@
 
 <script>
     const grid = new gridjs.Grid({
-      pagination: true,
+      pagination: {
+        limit: 1
+      },
+      language: {
+        search: {
+          placeholder: 'Procurar...'
+        },
+        pagination: {
+          previous: 'Anterior',
+          next: 'Próximo',
+          navigate: (page, pages) => `Página ${page} de ${pages}`,
+          page: (page) => `Página ${page}`,
+          showing: 'Mostrando de',
+          of: 'entre',
+          to: 'a',
+          results: 'resultados',
+        }
+      },
   search: {
     server: {
-      url: (prev, keyword) => `${prev}?search=${keyword}`
+      url: (prev, keyword) => `${prev}/${keyword}`
     }
   },
-  columns: ['Title', 'Director', 'Producer'],
+  columns: ['Razão Social', 'Nome Fantasia', 'CNPJ'],
   server: {
-    url: 'https://swapi.dev/api/films/',
-    then: data => data.results.map(movie => [movie.title, movie.director, movie.producer])
+    url: 'http://179.254.26.29:888/matics2/api/v1/getcompanies',
+    then: data => data.map(companies => [companies.razao_social, companies.nome_fantasia, companies.cnpj]) 
   } 
 }).render(document.getElementById("grid-table"));
 
-document.addEventListener("keydown", (e) => {
-  console.log(prev)
-})
 
 </script>
